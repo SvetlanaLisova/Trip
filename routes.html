@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Road Trip</title>
+<meta name="keywords" content="car, trips, companions" />
+<meta name="description" content="Website for searching trip companions" />
+<link href="default.css" rel="stylesheet" type="text/css" />
+ <title>Directions Service</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
+      defer
+    >
+	</script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+      }
+    </style>
+    <script>
+      function initMap() {
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 7,
+          center: { lat: 41.85, lng: -87.65 },
+        });
+        directionsRenderer.setMap(map);
+
+        const onChangeHandler = function () {
+          calculateAndDisplayRoute(directionsService, directionsRenderer);
+        };
+        document
+          .getElementById("start")
+          .addEventListener("change", onChangeHandler);
+        document
+          .getElementById("end")
+          .addEventListener("change", onChangeHandler);
+      }
+
+      function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+        directionsService.route(
+          {
+            origin: {
+              query: document.getElementById("start").value,
+            },
+            destination: {
+              query: document.getElementById("end").value,
+            },
+            travelMode: google.maps.TravelMode.DRIVING,
+          },
+          (response, status) => {
+            if (status === "OK") {
+              directionsRenderer.setDirections(response);
+            } else {
+              window.alert("Directions request failed due to " + status);
+            }
+          }
+        );
+      }
+    </script>
+  </head>
+
+<body>
+<div id="header">
+  <div id="logo">
+  <img src="images/logo.png">
+    
+  <div id="block">
+    <h1>Road Trip</h1>
+	</div>
+	</div>
+
+ 
+  <div id="menu">
+    <ul>
+      <li class="active"><a href="index.html">Home</a></li>
+      
+      <li><a href="routes.html">Routes</a></li>
+      <li><a href="https://www.startit.lv/">Companions</a></li>
+      <li><a href="https://www.startit.lv/">Forum</a></li>
+      <li><a href="https://www.startit.lv/">Contacts</a></li>
+    </ul>
+  </div>
+</div>
+  <div id="page">
+  <div id="content">
+    <div style="margin-bottom: 20px;">
+
+
+   <!-- <div id="floating-panel"> -->
+      <b>Start: </b>
+      <select id="start">
+        <option value="chicago, il">Chicago</option>
+        <option value="st louis, mo">St Louis</option>
+        <option value="joplin, mo">Joplin, MO</option>
+        <option value="oklahoma city, ok">Oklahoma City</option>
+        <option value="amarillo, tx">Amarillo</option>
+        <option value="gallup, nm">Gallup, NM</option>
+        <option value="flagstaff, az">Flagstaff, AZ</option>
+        <option value="winona, az">Winona</option>
+        <option value="kingman, az">Kingman</option>
+        <option value="barstow, ca">Barstow</option>
+        <option value="san bernardino, ca">San Bernardino</option>
+        <option value="los angeles, ca">Los Angeles</option>
+      </select>
+      <b>End: </b>
+      <select id="end">
+        <option value="chicago, il">Chicago</option>
+        <option value="st louis, mo">St Louis</option>
+        <option value="joplin, mo">Joplin, MO</option>
+        <option value="oklahoma city, ok">Oklahoma City</option>
+        <option value="amarillo, tx">Amarillo</option>
+        <option value="gallup, nm">Gallup, NM</option>
+        <option value="flagstaff, az">Flagstaff, AZ</option>
+        <option value="winona, az">Winona</option>
+        <option value="kingman, az">Kingman</option>
+        <option value="barstow, ca">Barstow</option>
+        <option value="san bernardino, ca">San Bernardino</option>
+        <option value="los angeles, ca">Los Angeles</option>
+      </select>
+    </div>
+    <div id="map"></div>
+  
+  <!-- end content -->
+  <div id="sidebar">
+
+	 <div id="login" class="boxed">
+      <h2 class="title">Sign in to Your Account</h2>
+      <div class="content">
+        <form id="loginform" method="get" action="">
+          <fieldset>
+		  <h3>Username</h3>
+          <input id="logininput" type="text"  name="logininput" value="" />
+		  <h3>Password</h3>
+		  <input id="loginpassword" type="text"  name="loginpassword" value="" />
+          <input id="loginsubmit" type="submit" value="Login" />
+          <p><a href="https://www.startit.lv/">Forget Password?</a></p>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+	                                   
+	
+    <div id="news" class="boxed">
+      <h2 class="title">News &amp; Events</h2>
+      <div class="content">
+        <ul>
+          <li class="first">
+            <h3>02 February 2020</h3>
+            <p><a href="http://www.balttour.lv/?link=10000000">Balttour 2020</a></p>
+          </li>
+          <li>
+            <h3>29 September 2020</h3>
+            <p><a href="https://www.tripadvisor.com/Attractions-g274960-Activities-Latvia.html">Top Attractions in Latvia&hellip;</a></p>
+          </li>
+          <li>
+            <h3>10 Oktober 2020</h3>
+            <p><a href="http://web-mastery.info/">Popular Cities in Latvia&hellip;</a></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- end sidebar -->
+  <div style="clear: both;">&nbsp;</div>
+</div>
+<!-- end page -->
+<div id="footer">
+  <p id="legal">2020 Road Trip. All Rights Reserved.</p>
+</div>
+</body>
+</html>
