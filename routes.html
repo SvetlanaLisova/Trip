@@ -2,19 +2,18 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<title>Directions Service</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Road Trip</title>
 <meta name="keywords" content="car, trips, companions" />
 <meta name="description" content="Website for searching trip companions" />
-<link href="default.css" rel="stylesheet" type="text/css" />
- <title>Directions Service</title>
-     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script>
-    <link rel="stylesheet" type="text/css" href="./style.css" />
-    <script src="./index.js"></script>
+<link href="css/default.css" rel="stylesheet" type="text/css" />
+     
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/table.css">
+<script type="text/javascript" src="js/filter.js"> </script>
+<script type="text/javascript" src="js/eraser.js"> </script>
+ 
   </head>
 
 <body>
@@ -42,40 +41,118 @@
   <div id="page">
   <div id="content">
     <div style="margin-bottom: 20px;">
+	 <div class="content">
+     
+      <div class="content_wrapper">
+	  
+          <div id="searching" class="boxed">
+		 <h2><b>Search Location</b></h2>
+		 <h3>From Location</h3>
+		  <input id="myInput" name="myInput" type="text"  value="" /> 
+		  <h3>To Location</h3>
+		  <input id="myInput1" name="myInput1" type="text" value="" />
+          <input  id="submit" type="submit" onclick="myFunction()" value="Search" />
+		   <input id="submit" type="submit" onclick="resetForm()"  value="Reset" />
+        
+  <div id="message" class="boxed"></div>
+         </div>
+	
 
-
-   <!-- <div id="floating-panel"> -->
-    <b>Start: </b>
-      <select id="start">
-        <option value="chicago, il">Chicago</option>
-        <option value="st louis, mo">St Louis</option>
-        <option value="joplin, mo">Joplin, MO</option>
-        <option value="oklahoma city, ok">Oklahoma City</option>
-        <option value="amarillo, tx">Amarillo</option>
-        <option value="gallup, nm">Gallup, NM</option>
-        <option value="flagstaff, az">Flagstaff, AZ</option>
-        <option value="winona, az">Winona</option>
-        <option value="kingman, az">Kingman</option>
-        <option value="barstow, ca">Barstow</option>
-        <option value="san bernardino, ca">San Bernardino</option>
-        <option value="los angeles, ca">Los Angeles</option>
-      </select>
-      <b>End: </b>
-      <select id="end">
-        <option value="chicago, il">Chicago</option>
-        <option value="st louis, mo">St Louis</option>
-        <option value="joplin, mo">Joplin, MO</option>
-        <option value="oklahoma city, ok">Oklahoma City</option>
-        <option value="amarillo, tx">Amarillo</option>
-        <option value="gallup, nm">Gallup, NM</option>
-        <option value="flagstaff, az">Flagstaff, AZ</option>
-        <option value="winona, az">Winona</option>
-        <option value="kingman, az">Kingman</option>
-        <option value="barstow, ca">Barstow</option>
-        <option value="san bernardino, ca">San Bernardino</option>
-        <option value="los angeles, ca">Los Angeles</option>
-      </select>
+        <table id="myTable">
+          <thead>
+            <tr>
+                <th>From Location</th>
+                <th>To Location</th>
+                <th>Distance(Km) </th>
+                
+           
+            </tr>
+        </thead>
+        <tbody>
+            
+                <td>Riga </td>
+                <td>Daugavpils</td>
+                <td>190</td>
+                
+              
+            </tr>
+            
+                <td>Liepaja</td>
+                <td>Jelgava</td>
+                <td>166</td>
+                
+               
+            </tr>
+           
+                <td>Jurmala</td>
+                <td>Ventspils</td>
+                <td>141</td>
+               
+                
+            </tr>
+            
+                <td>Rezekne</td>
+                <td>Jekabpils</td>
+                <td>90</td>
+                
+               
+            </tr>
+           
+                <td>Valmiera</td>
+                <td>Ogre</td>
+                <td>94</td>
+              
+            </tr>
+           
+                <td>Tukums </td>
+                <td>Cesis</td>
+                <td>133</td>
+                
+            </tr>
+            
+                <td>Liepaja</td>
+                <td>Riga</td>
+                <td>215</td>
+               
+                
+            </tr>
+            
+                <td>Rezekne</td>
+                <td>Riga</td>
+                <td>240</td>
+                
+            
+            </tr>
+            
+                <td>Cesis</td>
+                <td>Ogre</td>
+                <td>91</td>
+                
+             
+            </tr>
+         
+                <td>Jurmala</td>
+                <td>Valmiera</td>
+                <td>152</td>
+                
+             
+            </tr>
+           
+                <td>Jekabpils</td>
+                <td>Liepaja</td>
+                <td>345</td>
+      
+            
+            </tr>
+            <tbody>
+        </table>
+		</form>
+      </div>
     </div>
+	
+    </div>
+	      
+       
     <div id="map"></div>
 	</div>
   
@@ -94,7 +171,7 @@
           <input id="loginsubmit" type="submit" value="Login" />
           <p><a href="https://www.startit.lv/">Forget Password?</a></p>
           </fieldset>
-        </form>
+       
       </div>
 	  </div>
 	  
@@ -126,9 +203,14 @@
   <!-- end sidebar -->
   <div style="clear: both;">&nbsp;</div>
 </div>
+<iframe name="iframe1" id="iframe1" src="https://www.distance-cities.com"
+        frameborder="0" border="0" cellspacing="0"
+        style="border-style: none;width: 100%; height: 500px;"></iframe>
 <!-- end page -->
 <div id="footer">
-  <p id="legal">2020 Road Trip. All Rights Reserved.</p>
-</div>
+  <p id="legal">2020 Road Trip. All Rights Reserved.</p></div>
+  
+ 
+
 </body>
 </html>
